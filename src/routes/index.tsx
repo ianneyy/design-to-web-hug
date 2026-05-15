@@ -712,7 +712,7 @@ function Footer() {
               Transforming collaboration through enterprise-grade smart technology solutions for education, corporate, and institutional excellence.
             </p>
             <div className="mt-5 flex gap-3">
-              {[Linkedin, Twitter, Facebook, Youtube].map((I, i) => (
+              {[Share2, AtSign, Hash, Play].map((I, i) => (
                 <a key={i} href="#" className="w-9 h-9 rounded-lg bg-secondary grid place-items-center text-muted-foreground hover:text-foreground transition-colors">
                   <I className="w-4 h-4" />
                 </a>
