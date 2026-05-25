@@ -278,7 +278,7 @@ const events = [
     date: "July 22, 2026",
     location: "New York City",
     attendees: "2000+",
-    img: "/img/Screenshot_2026-05-25_134935.png",
+    img: "/img/Screenshot_2026-05-25_153724.png",
   },
   {
     type: "Expo",
@@ -287,7 +287,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    img: "/img/immigration.jpg",
+    img: "/img/Screenshot_2026-05-25_143047.png",
   },
   {
     type: "Webinar",
@@ -296,7 +296,7 @@ const events = [
     date: "September 5, 2026",
     location: "Online",
     attendees: "10000+",
-    img: "/img/Screenshot_2026-05-25_143047.png",
+    img: "/img/Screenshot_2026-05-25_154606.png",
   },
   {
     type: "Expo",
@@ -305,7 +305,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80",
+    img: "/img/agrigan2.png",
   },
   {
     type: "Expo",
@@ -314,7 +314,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80",
+    img: "/img/DERN2.png",
   },
   {
     type: "Expo",
@@ -323,7 +323,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80",
+    img: "/img/navy.png",
   },
   {
     type: "Expo",
@@ -332,7 +332,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80",
+    img: "/img/AYALA.png",
   },
 ];
 
