@@ -182,6 +182,12 @@
   box-shadow: var(--shadow-card);
 }
 
+/* Ensure consistent spacing above card buttons while keeping bottom alignment */
+.card-button {
+  margin-top: auto;
+  padding-top: 16px; /* ~16px spacing above button */
+}
+
 @utility chip {
   display: inline-flex;
   align-items: center;

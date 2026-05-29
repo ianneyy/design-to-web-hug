@@ -1339,7 +1339,7 @@ function Events() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {events.map((e) => (
-            <div key={e.title} className="card-surface overflow-hidden">
+            <div key={e.title} className="card-surface overflow-hidden flex flex-col h-full">
               <div className="relative">
                 <img
                   src={e.img}
@@ -1354,7 +1354,7 @@ function Events() {
                   <Users className="w-3.5 h-3.5" /> {e.attendees}
                 </span>
               </div>
-              <div className="p-6">
+              <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl font-bold">{e.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{e.desc}</p>
                 <div className="mt-5 space-y-2.5 text-sm">
@@ -1365,9 +1365,11 @@ function Events() {
                     <MapPin className="w-4 h-4 text-primary" /> {e.location}
                   </div>
                 </div>
-                <a href="#contact" className="btn-primary w-full mt-6">
-                  Register Now <ExternalLink className="w-4 h-4" />
-                </a>
+                <div className="card-button mt-auto">
+                  <a href="#contact" className="btn-primary w-full">
+                    Register Now <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           ))}
