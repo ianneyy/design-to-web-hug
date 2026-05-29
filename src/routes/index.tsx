@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import {
   Sparkles,
   Shield,
@@ -64,9 +64,9 @@ export const Route = createFileRoute("/")({
 // Powering Innovation Across Industries
 const stats = [
   { value: "500+", label: "Enterprise Clients", icon: Building2 },
-  { value: "1000+", label: "Educational Institutions", icon: GraduationCap },
+  { value: "200+", label: "Educational Institutions", icon: GraduationCap },
   { value: "200+", label: "Government Agencies", icon: Building },
-  { value: "2500+", label: "Projects Completed", icon: Users },
+  { value: "50+", label: "Projects Completed", icon: Users },
 ];
 
 const partners = [
@@ -164,7 +164,7 @@ const environments = [
       "Wireless Screen Sharing",
      
     ],
-    img: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=1200&q=80",
+    img: "/img/SC.jpg",
     //  img: "/img/hero-circuit.jpg",
   },
   {
@@ -710,53 +710,53 @@ const events = [
   },
   {
     type: "Expo",
-    title: "TRAVEL SALE EXPO",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    title: "TRAVEL SALE",
+    desc: "Use Millennium smart boards to broadcast exclusive airline packages and book dream vacations seamlessly today!",
     date: "August 10-12, 2026",
-    location: "Washington, DC",
-    attendees: "3000+",
-    img: "",
+    location: "Mandaluyong City, Philippines",
+    attendees: "10000+",
+    img: "/img/AYALA.png",
   },
   {
     type: "Expo",
     title: "HALAL EVENT (MEGAMALL)",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    desc: "Use Millennium smart boards to showcase advanced Halal product innovations through highly engaging food presentations today!",
     date: "August 10-12, 2026",
-    location: "Washington, DC",
-    attendees: "3000+",
+    location: "Mandaluyong City, Philippines",
+    attendees: "10000+",
     img: "/img/HALAL.jpg",
   },
   {
     type: "Expo",
     title: "HALAL EVENT (WORLD TRADE CENTER)",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    desc: "Use Millennium smart boards to broadcast global Halal trade opportunities through highly engaging B2B presentations today!",
     date: "August 10-12, 2026",
-    location: "Washington, DC",
-    attendees: "3000+",
+    location: "Pasay City, Philippines",
+    attendees: "10000+",
     img: "/img/HALAL2.jpg",
   },
   {
-    type: "Expo",
+    type: "Ceremony",
     title: "GUSI PEACE PRIZE FOUNDATION",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    desc: "Use Millennium smart boards to honor global humanitarian laureates through highly collaborative and engaging international peace presentations today!",
     date: "August 10-12, 2026",
-    location: "Washington, DC",
-    attendees: "3000+",
+    location: "Manila, Philippines",
+    attendees: "1000+",
     img: "/img/GUSI.jpg",
   },
   {
     type: "Expo",
     title: "FIRST CAVITE INDUSTRIAL ESTATE",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    desc: "Use Millennium smart boards to pitch industrial solutions and streamline factory operations through highly engaging presentations today!",
     date: "August 10-12, 2026",
-    location: "Washington, DC",
-    attendees: "3000+",
+    location: "Dasmariñas, Cavite, Philippines",
+    attendees: "5000+",
     img: "/img/CAVITE.jpg",
   },
   {
     type: "Expo",
     title: "WORLDBEX (SMX)",
-    desc: "Showcasing smart governance and public-sector digital transformation solutions",
+    desc: "Use Millennium smart boards to showcase architectural blueprints and construction innovations through highly engaging design presentations today!",
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
@@ -791,11 +791,61 @@ const certifications = [
 
 /* ----------------------------- Component ----------------------------- */
 
+function StarfieldSection({
+  children,
+  className = "",
+  ...props
+}: {
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}) {
+  const stars = Array.from({ length: 24 }, (_, i) => ({
+    top: `${(i * 7 + 5) % 90}%`,
+    left: `${(i * 13 + 7) % 100}%`,
+    opacity: [0.35, 0.55, 0.75, 0.25][i % 4],
+    size: [2, 3, 1.5, 2.5][i % 4],
+  }));
+
+  return (
+    <section className={`relative overflow-hidden ${className}`} {...props}>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.08),transparent_25%),radial-gradient(circle_at_bottom,rgba(56,189,248,0.05),transparent_35%)]" />
+        <div className="absolute inset-0 bg-black" />
+        {stars.map((star, index) => (
+          <span
+            key={index}
+            className="absolute rounded-full bg-white/80 shadow-[0_0_12px_rgba(148,163,184,0.35)]"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+            }}
+          />
+        ))}
+      </div>
+      {children}
+    </section>
+  );
+}
+
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <img
+          src="/img/cover.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-35 brightness-[0.65] contrast-[1.05] blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,7,18,0.65)_0%,rgba(3,7,18,0.72)_35%,rgba(2,6,23,0.86)_100%)]" />
+      </div>
+
       <Header />
-      <main className="pt-16">
+      <main className="relative z-10 pt-16">
         <Hero />
         <Trust />
         <Solutions />
@@ -911,8 +961,8 @@ function Hero() {
 
 function Trust() {
   return (
-    <section className="relative py-24 border-t border-border">
-      <div className="mx-auto max-w-7xl px-6">
+    <StarfieldSection className="py-24 ">
+      <div className="mx-auto max-w-7xl px-6 ">
         <SectionHeading
           chip={
             <>
@@ -953,7 +1003,7 @@ function Trust() {
           })}
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -961,7 +1011,7 @@ function Trust() {
 
 function Solutions() {
   return (
-    <section id="solutions" className="py-24 border-t border-border">
+    <StarfieldSection id="solutions" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -997,7 +1047,7 @@ function Solutions() {
           ))}
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -1005,7 +1055,7 @@ function Solutions() {
 
 function Products() {
   return (
-    <section id="products" className="py-24 border-t border-border">
+    <StarfieldSection id="products" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1069,7 +1119,7 @@ function Products() {
           </div>
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -1079,7 +1129,7 @@ function Showcase() {
   const [active, setActive] = useState(environments[0].key);
   const env = environments.find((e) => e.key === active)!;
   return (
-    <section id="showcase" className="py-24 border-t border-border">
+    <StarfieldSection id="showcase" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1143,7 +1193,7 @@ function Showcase() {
           </div>
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -1199,7 +1249,7 @@ function Portfolio() {
   const filtered = projects.filter((p) => p.category === filter);
 
   return (
-    <section id="installations" className="py-24 border-t border-border">
+    <StarfieldSection id="installations" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1266,7 +1316,7 @@ function Portfolio() {
           ))}
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -1274,7 +1324,7 @@ function Portfolio() {
 
 function Events() {
   return (
-    <section id="events" className="py-24 border-t border-border">
+    <StarfieldSection id="events" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1323,7 +1373,7 @@ function Events() {
           ))}
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
@@ -1332,7 +1382,7 @@ function Events() {
 function BookDemo() {
   const [tab, setTab] = useState<"demo" | "lease">("demo");
   return (
-    <section id="contact" className="py-24 border-t border-border relative overflow-hidden">
+    <StarfieldSection id="contact" className="py-24 border-t border-border">
       <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-6">
         <SectionHeading
@@ -1411,11 +1461,11 @@ function BookDemo() {
                   <div className="text-xs text-muted-foreground">Enterprises</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">1000+</div>
+                  <div className="text-2xl font-bold">200+</div>
                   <div className="text-xs text-muted-foreground">Schools</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">50+</div>
+                  <div className="text-2xl font-bold">20+</div>
                   <div className="text-xs text-muted-foreground">Countries</div>
                 </div>
               </div>
@@ -1476,7 +1526,7 @@ function BookDemo() {
           </form>
         </div>
       </div>
-    </section>
+    </StarfieldSection>
   );
 }
 
