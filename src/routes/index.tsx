@@ -42,8 +42,7 @@ import heroImg from "@/assets/millennium tv.png";
 import { Header } from "@/components/site/Header";
 import { ProjectCard } from "@/components/site/ProjectCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import Spline from "@splinetool/react-spline";
-
+import Aurora from "@/components/site/Aurora";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -188,7 +187,7 @@ function useCountUpOnVisible(values: number[]) {
           rafId = requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(ref.current);
@@ -210,11 +209,7 @@ const environments = [
     icon: GraduationCap,
     title: "Interactive Learning Environment",
     desc: "Transform traditional classrooms into engaging digital learning spaces with interactive displays, wireless collaboration, and smart content management.",
-    features: [
-      '86" and 65" 4K Interactive Display',
-      "Wireless Screen Sharing",
-     
-    ],
+    features: ['86" and 65" 4K Interactive Display', "Wireless Screen Sharing"],
     img: "/img/SC.jpg",
     //  img: "/img/hero-circuit.jpg",
   },
@@ -246,7 +241,7 @@ const environments = [
       "Desk Booking",
       "Energy Optimization",
     ],
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+    img: "/img/SMART_OFFICE1.jpg",
   },
   {
     key: "training",
@@ -290,10 +285,10 @@ const projects = [
     location: "Quezon City, Philippines",
     category: "Corporate",
     images: [
-      "/img/AVIDA (1).jpg", 
-      "/img/AVIDA (2).jpg", 
-      "/img/AVIDA (3).jpg", 
-      "/img/AVIDA (4).jpg", 
+      "/img/AVIDA (1).jpg",
+      "/img/AVIDA (2).jpg",
+      "/img/AVIDA (3).jpg",
+      "/img/AVIDA (4).jpg",
     ],
   },
   // {
@@ -301,7 +296,7 @@ const projects = [
   //   title: "State University",
   //   location: "Boston, USA",
   //   category: "Schools | University",
-  //   images: [ "/img/stateuniversity.webp" 
+  //   images: [ "/img/stateuniversity.webp"
 
   //   ],
   // },
@@ -310,47 +305,38 @@ const projects = [
     title: "Claret School Center",
     location: "Quezon City, Philippines",
     category: "Schools | University",
-    images: [ 
+    images: [
       "/img/CLARA1.jpg",
       "/img/CLARA2.jpg",
       "/img/CLARA3.jpg",
       "/img/Screenshot 2026-05-26 115250.png",
-
     ],
   },
   {
-  tag: "Comprehensive Review Programs",
-  title: "Carl Balita Review Center",
-  location: "NCR, Philippines",
-  category: "Schools | University",
-  images: [
-    "/img/photo_2024-07-28_08-47-30 (2).jpg",
-    "/img/photo_2024-07-28_08-47-30.jpg",
-    "/img/photo_2024-07-28_09-05-27.jpg",
-    "/img/carlbalita.png",
-  ],
-},
+    tag: "Comprehensive Review Programs",
+    title: "Carl Balita Review Center",
+    location: "NCR, Philippines",
+    category: "Schools | University",
+    images: [
+      "/img/photo_2024-07-28_08-47-30 (2).jpg",
+      "/img/photo_2024-07-28_08-47-30.jpg",
+      "/img/photo_2024-07-28_09-05-27.jpg",
+      "/img/carlbalita.png",
+    ],
+  },
   {
     tag: " Quality Education",
     title: "MCA Montessori School Taguig",
     location: "Taguig, Philippines",
     category: "Schools | University",
-    images: [
-      "/img/MCA.jpg",
-    ],
+    images: ["/img/MCA.jpg"],
   },
   {
     tag: "Highly Employable Courses",
     title: "Quezon City University",
     location: "Quezon City, Philippines",
     category: "Schools | University",
-    images: [
-      "/img/QCU (1).jpg",
-      "/img/QCU (2).jpg",
-      "/img/QCU (3).jpg",
-      "/img/QCU.jpg",
-
-    ],
+    images: ["/img/QCU (1).jpg", "/img/QCU (2).jpg", "/img/QCU (3).jpg", "/img/QCU.jpg"],
   },
   // {
   //   tag: "Complete AV System",
@@ -366,37 +352,21 @@ const projects = [
     title: "Armed Forces of the Philippines",
     location: "Quezon City, Philippines",
     category: "Government",
-    images: [ 
-      "/img/AFP1.jpg",
-      "/img/AFP2.jpg",
-      "/img/AFP3.jpg",
-      "/img/AFP4.jpg",
-
-     ],
+    images: ["/img/AFP1.jpg", "/img/AFP2.jpg", "/img/AFP3.jpg", "/img/AFP4.jpg"],
   },
-   {
+  {
     tag: "National Defense",
     title: "Manila Police District",
     location: "Quezon City, Philippines",
     category: "Government",
-    images: [ 
-      "/img/MPD (1).jpg",
-      "/img/MPD (2).jpg",
-      "/img/MPD (3).jpg",
-
-      
-
-     ],
+    images: ["/img/MPD (1).jpg", "/img/MPD (2).jpg", "/img/MPD (3).jpg"],
   },
   {
     tag: "Online Public Services",
     title: "Department of Information and Communications Technology",
     location: "Quezon City, Philippines",
     category: "Government",
-    images: [
-      "/img/DICT (1).jpg",
-      "/img/DICT (2).jpg",
-    ],
+    images: ["/img/DICT (1).jpg", "/img/DICT (2).jpg"],
   },
   {
     tag: "Environmental Regulations",
@@ -411,7 +381,7 @@ const projects = [
       "/img/DepartmentNR (5).jpg",
     ],
   },
-   {
+  {
     tag: "Environmental Regulations",
     title: "Department of Agrarian ",
     location: "Quezon City, Philippines",
@@ -421,10 +391,9 @@ const projects = [
       "/img/AGRARIAN (2).jpg",
       "/img/AGRARIAN (3).jpg",
       "/img/AGRARIAN.jpg",
-   
     ],
   },
-  
+
   {
     tag: "Public Safety & Enforecement",
     title: "Bureau of Immigration",
@@ -436,7 +405,6 @@ const projects = [
       "/img/IMMIG1 (3).jpg",
       "/img/IMMIGP2 (1).jpg",
       "/img/IMMIGP2 (2).jpg",
-
     ],
   },
 
@@ -484,34 +452,21 @@ const projects = [
     title: "Department of the Interior and Local Government",
     location: "Quezon City, Philippines",
     category: "Government",
-    images: [
-      "/img/DILG (1).jpg",
-      "/img/DILG (2).jpg",
-      "/img/DILG (3).jpg",
-      "/img/DILG (4).jpg",
-    ],
+    images: ["/img/DILG (1).jpg", "/img/DILG (2).jpg", "/img/DILG (3).jpg", "/img/DILG (4).jpg"],
   },
   {
     tag: "Basic & Emergrency Care",
     title: "Novaliches General Hospital",
     location: "Quezon City, Philippines",
     category: "Government",
-    images: [
-      "/img/NCH (1).jpg",
-      "/img/NCH (2).jpg",
-      "/img/NCH (3).jpg",
-      "/img/NCH (4).jpg",
-    ],
+    images: ["/img/NCH (1).jpg", "/img/NCH (2).jpg", "/img/NCH (3).jpg", "/img/NCH (4).jpg"],
   },
   {
     tag: "Urban Green Space Management",
     title: "National Parks Development Committee",
     location: "Metro Manila, Philippines",
     category: "Government",
-    images: [
-      "/img/NPDC (1).jpg",
-      "/img/NPDC (2).jpg",
-    ],
+    images: ["/img/NPDC (1).jpg", "/img/NPDC (2).jpg"],
   },
   // {
   //   tag: "Smart Office System",
@@ -539,24 +494,14 @@ const projects = [
     title: "AYALA Council Meeting",
     location: "Makati City, Philippines",
     category: "Corporate",
-    images: [
-      "/img/ACM (1).jpg",
-      "/img/ACM (2).jpg",
-      "/img/ACM (3).jpg",
-      "/img/ACM (4).jpg",
-    ],
+    images: ["/img/ACM (1).jpg", "/img/ACM (2).jpg", "/img/ACM (3).jpg", "/img/ACM (4).jpg"],
   },
   {
     tag: "Commercial Office",
     title: "AYALA Tower One",
     location: "Makati City, Philippines",
     category: "Corporate",
-    images: [
-      "/img/ATO (3).jpg",
-      "/img/ATO (2).jpg",
-      "/img/ATO (1).jpg",
-      "/img/ATO (4).jpg",
-    ],
+    images: ["/img/ATO (3).jpg", "/img/ATO (2).jpg", "/img/ATO (1).jpg", "/img/ATO (4).jpg"],
   },
   {
     tag: "Membership Sports",
@@ -576,12 +521,7 @@ const projects = [
     title: "Suntrust Building",
     location: "Manila, Philippines",
     category: "Corporate",
-    images: [
-      "/img/SB (1).jpg",
-      "/img/SB (2).jpg",
-      "/img/SB (3).jpg",
-      "/img/SB (4).jpg",
-    ],
+    images: ["/img/SB (1).jpg", "/img/SB (2).jpg", "/img/SB (3).jpg", "/img/SB (4).jpg"],
   },
   {
     tag: "Product Distributor",
@@ -597,22 +537,15 @@ const projects = [
     title: "Spark Industries",
     location: "Quezon City, Philippines",
     category: "Corporate",
-    images: [
-      "/img/SI (1).jpg",
-      "/img/SI (2).jpg",
-    ],
+    images: ["/img/SI (1).jpg", "/img/SI (2).jpg"],
   },
   {
     tag: "Rental Space",
     title: "Fire and Ice Studios",
     location: "Quezon City, Philippines",
     category: "Corporate",
-    images: [
-      "/img/FCS (1).jpg",
-      "/img/FCS (2).jpg",
-    ],
+    images: ["/img/FCS (1).jpg", "/img/FCS (2).jpg"],
   },
-  
 ];
 // images below Meet Us at Industry Events
 const events = [
@@ -623,27 +556,22 @@ const events = [
     date: "June 15-17, 2026",
     location: "Quezon City, Philippines",
     attendees: "5000+",
-    images: [ 
-      "/img/IMG_9178.jpeg",
-      "/img/AFP2.jpg",
-      "/img/AFP3.jpg",
-      "/img/AFP4.jpg",
-    ],
+    images: ["/img/IMG_9178.jpeg", "/img/AFP2.jpg", "/img/AFP3.jpg", "/img/AFP4.jpg"],
   },
-   {
+  {
     type: "Gala Ceremony",
     title: "ARMED FORCES OF THE PHILIPPINE COMMISSIONED OFFICERS COUNTRY GAWAD AWARDS",
     desc: "This national event gathers public servants, civic leaders, and military heroes to celebrate extraordinary service to the country. Thery use the Millennium smart board to display high-definition tribute videos and nominee profiles during the live ceremony.",
     date: "June 15-17, 2026",
     location: "Quezon City, Philippines",
     attendees: "500+",
-    images: [ "/img/GAWAD.jpg",
-            "/img/GAWAD2 (1).jpg",
-            "/img/GAWAD2 (2).jpg",
-            "/img/GAWAD2 (3).jpg",
-            "/img/GAWAD2 (4).jpg",
-
-     ],
+    images: [
+      "/img/GAWAD.jpg",
+      "/img/GAWAD2 (1).jpg",
+      "/img/GAWAD2 (2).jpg",
+      "/img/GAWAD2 (3).jpg",
+      "/img/GAWAD2 (4).jpg",
+    ],
   },
   {
     type: "Exposition",
@@ -652,9 +580,7 @@ const events = [
     date: "July 22, 2026",
     location: "Quezon City, Philippines",
     attendees: "3000+",
-    images: [ "/img/DICT (1).jpg",
-      "/img/DICT (2).jpg",
-    ],
+    images: ["/img/DICT (1).jpg", "/img/DICT (2).jpg"],
   },
   {
     type: "Summit",
@@ -663,9 +589,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Manila, Philippines",
     attendees: "2000+",
-    images: [ "/img/IMMIG1 (3).jpg",
-      "/img/IMMIGP2 (1).jpg",
-     ],
+    images: ["/img/IMMIG1 (3).jpg", "/img/IMMIGP2 (1).jpg"],
   },
   {
     type: "Conference",
@@ -674,10 +598,7 @@ const events = [
     date: "September 5, 2026",
     location: "Pasig City, Philippines",
     attendees: "5000+",
-    images: [ "/img/DAP (2).jpg",
-      "/img/DAP (5).jpg",
-      "/img/DAP (1).jpg",
-     ],
+    images: ["/img/DAP (2).jpg", "/img/DAP (5).jpg", "/img/DAP (1).jpg"],
   },
   {
     type: "Convention",
@@ -686,11 +607,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Quezon City, Philippines",
     attendees: "5000+",
-    images: [ "/img/AGRARIAN.jpg",
-      "/img/AGRARIAN (3).jpg",
-      "/img/AGRARIAN (1).jpg",
-     ] ,
-        
+    images: ["/img/AGRARIAN.jpg", "/img/AGRARIAN (3).jpg", "/img/AGRARIAN (1).jpg"],
   },
   {
     type: "Summit",
@@ -699,10 +616,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Quezon City, Philippines",
     attendees: "10000+",
-    images: [ "/img/DepartmentNR (3).jpg",
-      "/img/DepartmentNR (5).jpg",
-      "/img/DepartmentNR (1).jpg",
-     ],
+    images: ["/img/DepartmentNR (3).jpg", "/img/DepartmentNR (5).jpg", "/img/DepartmentNR (1).jpg"],
   },
   {
     type: "Exposition",
@@ -711,7 +625,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Taguig City, Philippines",
     attendees: "5000+",
-    images: [ "/img/PCCI.jpg" ],
+    images: ["/img/PCCI.jpg"],
   },
   {
     type: "Exhibition",
@@ -720,10 +634,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Cavite, Philippines",
     attendees: "5000+",
-    images: [ "/img/NAVY (5).jpg", 
-      "/img/NAVY (4).jpg",
-      "/img/NAVY (3).jpg",
-     ],
+    images: ["/img/NAVY (5).jpg", "/img/NAVY (4).jpg", "/img/NAVY (3).jpg"],
   },
   {
     type: "Exposition",
@@ -732,10 +643,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Makati City, Philippines",
     attendees: "10000+",
-    images: [ "/img/AYALA (4).jpg", 
-      "/img/AYALA (3).jpg",
-      "/img/AYALA (1).jpg"
-    ],
+    images: ["/img/AYALA (4).jpg", "/img/AYALA (3).jpg", "/img/AYALA (1).jpg"],
   },
   {
     type: "Exposition",
@@ -744,9 +652,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Pasay City, Philippines",
     attendees: "4000+",
-    images: [ "/img/PHARMA.jpg",
-      "/img/PHARMA2.jpg",
-     ],
+    images: ["/img/PHARMA.jpg", "/img/PHARMA2.jpg"],
   },
   {
     type: "Exposition",
@@ -755,24 +661,18 @@ const events = [
     date: "August 10-12, 2026",
     location: "Quezon City, Philippines",
     attendees: "5000+",
-    images: [ "/img/BL.jpg",
-      "/img/BL2 (1).jpg",
-      "/img/BL2 (2).jpg",
-      "/img/BL2 (3).jpg",
-     ],
+    images: ["/img/BL.jpg", "/img/BL2 (1).jpg", "/img/BL2 (2).jpg", "/img/BL2 (3).jpg"],
   },
-   {
+  {
     type: "Seminar",
     title: "Elite Teacher",
     desc: "This academic seminar equips top educators with modern pedagogical techniques and digital tools for interactive classrooms. Instructors use the Millennium smart board to model advanced blended-learning lessons and demonstrate collaborative gamified teaching apps.",
     date: "August 10-12, 2026",
     location: "Quezon City, Philippines",
     attendees: "2000+",
-    images: [ "/img/ETS.jpg",
-      "/img/ETS2.jpg",
-     ],
+    images: ["/img/ETS.jpg", "/img/ETS2.jpg"],
   },
-   
+
   {
     type: "Conference",
     title: "INNOVATION AI TECH-TALK",
@@ -780,7 +680,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Taguig City, Philippines",
     attendees: "1500+",
-    images: [ "/img/AYALA.png" ],
+    images: ["/img/AYALA.png"],
   },
   {
     type: "Summit",
@@ -789,9 +689,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Santa Ignacia, Tarlac, Philippines",
     attendees: "2000+",
-    images: [ "/img/TSI.png",
-      "/img/TSI2.jpg",
-     ],
+    images: ["/img/TSI.png", "/img/TSI2.jpg"],
   },
   {
     type: "Exposition",
@@ -800,7 +698,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Tagaytay City, Philippines",
     attendees: "3000+",
-    images: [ "/img/TH.jpg" ],
+    images: ["/img/TH.jpg"],
   },
   {
     type: "Exposition",
@@ -809,7 +707,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Mandaluyong City, Philippines",
     attendees: "10000+",
-    images: [ "/img/AYALA.png" ],
+    images: ["/img/AYALA.png"],
   },
   {
     type: "Exposition",
@@ -818,7 +716,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Mandaluyong City, Philippines",
     attendees: "10000+",
-    images: [ "/img/HALAL.jpg" ],
+    images: ["/img/HALAL.jpg"],
   },
   {
     type: "Exposition",
@@ -827,11 +725,12 @@ const events = [
     date: "August 10-12, 2026",
     location: "Pasay City, Philippines",
     attendees: "10000+",
-    images: [ "/img/HALAL2.jpg", 
+    images: [
+      "/img/HALAL2.jpg",
       "/img/HALAL3 (1).jpg",
       "/img/HALAL3 (2).jpg",
       "/img/HALAL3 (3).jpg",
-     ],
+    ],
   },
   {
     type: "Ceremony",
@@ -840,9 +739,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Manila, Philippines",
     attendees: "1000+",
-    images: [ "/img/GUSI.jpg", 
-      "/img/GUSI2.jpg",
-     ],
+    images: ["/img/GUSI.jpg", "/img/GUSI2.jpg"],
   },
   {
     type: "Exposition",
@@ -851,11 +748,12 @@ const events = [
     date: "August 10-12, 2026",
     location: "Dasmariñas, Cavite, Philippines",
     attendees: "5000+",
-    images: [ "/img/CAVITE.jpg",
+    images: [
+      "/img/CAVITE.jpg",
       "/img/CAVITE2 (1).jpg",
       "/img/CAVITE2 (2).jpg",
       "/img/CAVITE2 (3).jpg",
-     ],
+    ],
   },
   {
     type: "Exposition",
@@ -864,11 +762,12 @@ const events = [
     date: "August 10-12, 2026",
     location: "Washington, DC",
     attendees: "3000+",
-    images: [ "/img/WORLDBEX.jpg",
+    images: [
+      "/img/WORLDBEX.jpg",
       "/img/WORLDBEX2 (1).jpg",
       "/img/WORLDBEX2 (2).jpg",
       "/img/WORLDBEX2 (3).jpg",
-     ],
+    ],
   },
   {
     type: "Conference",
@@ -877,10 +776,7 @@ const events = [
     date: "August 10-12, 2026",
     location: "Quezon City, Philippines",
     attendees: "2000+",
-    images: [ "/img/WEF.jpg", 
-      "/img/WEF2 (1).jpg",
-      "/img/WEF2 (2).jpg",
-    ],
+    images: ["/img/WEF.jpg", "/img/WEF2 (1).jpg", "/img/WEF2 (2).jpg"],
   },
   {
     type: "Tour",
@@ -889,12 +785,21 @@ const events = [
     date: "August 10-12, 2026",
     location: "Fredericksburg, United States ",
     attendees: "1000+",
-    images: [ "/img/AYALA.png" ],
+    images: ["/img/AYALA.png"],
   },
 ];
 
 const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
     {direction === "left" ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
   </svg>
 );
@@ -1004,7 +909,10 @@ function StarfieldSection({
 
   return (
     <section className={`relative overflow-hidden ${className}`} {...props}>
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.08),transparent_25%),radial-gradient(circle_at_bottom,rgba(56,189,248,0.05),transparent_35%)]" />
         <div className="absolute inset-0 bg-black" />
         {stars.map((star, index) => (
@@ -1029,7 +937,10 @@ function StarfieldSection({
 function Index() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
         <img
           src="/img/cover.jpg"
           alt=""
@@ -1064,32 +975,34 @@ function Hero() {
     <section className="relative overflow-hidden">
       {/* <div className="absolute inset-0 bg-grid opacity-60" aria-hidden /> */}
       <div className="absolute w-full h-full inset-0">
-        <Spline
-          scene="https://prod.spline.design/us3ALejTXl6usHZ7/scene.splinecode"
-          style={{
-            width: "100%",
-            height: "100%",
-            pointerEvents: "auto",
-          }}
+        <Aurora
+          className="absolute inset-0 pointer-events-none"
+          colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
         />
-        {/* Black overlay gradient to hide Spline logo at the bottom */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background: "linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.0) 70%)",
+            background:
+              "linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.0) 70%)",
             zIndex: 2,
           }}
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center" style={{zIndex: 3}}>
+      <div
+        className="relative mx-auto max-w-7xl px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center"
+        style={{ zIndex: 3 }}
+      >
         <div>
           <span className="chip">
             <Sparkles className="w-3.5 h-3.5 text-primary" /> Powered by Brains Infinite Innovation
             Inc.
           </span>
           <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
-            The start of <span className="text-gradient-brand">Modern Day Technology</span>
+            The start of <span className="text-white">Modern Day Technology</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
             Millennium is a smart interactive board that can do presentatiosn in the classroom, the
@@ -1171,7 +1084,7 @@ function Trust() {
     if (!sectionRef.current || hasAnimated) return;
 
     const targetValues = stats.map((stat) => Number(stat.value.replace(/\D/g, "")));
-    const suffixes = stats.map((stat) => (stat.value.match(/\D+$/)?.[0] ?? ""));
+    const suffixes = stats.map((stat) => stat.value.match(/\D+$/)?.[0] ?? "");
     const duration = 1400;
     let rafId = 0;
     let startTime: number | null = null;
@@ -1200,7 +1113,7 @@ function Trust() {
           rafId = requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(sectionRef.current);
@@ -1237,7 +1150,9 @@ function Trust() {
                 <div className="w-11 h-11 rounded-lg bg-primary/10 grid place-items-center mx-auto">
                   <s.icon className="w-5 h-5 text-primary" />
                 </div>
-                <div className="mt-4 text-3xl font-bold">{hasAnimated ? `${rawValue}${suffix}` : displayValue}</div>
+                <div className="mt-4 text-3xl font-bold">
+                  {hasAnimated ? `${rawValue}${suffix}` : displayValue}
+                </div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
               </div>
             );
