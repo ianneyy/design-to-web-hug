@@ -873,13 +873,10 @@ function EventCard({ event }: { event: (typeof events)[number] }) {
           <div className="flex items-center gap-2.5">
             <MapPin className="w-4 h-4 text-primary" /> {event.location}
           </div>
-        </div>
-        <div className="card-button mt-auto">
-          <a href="#contact" className="btn-primary w-full">
-            Register Now <ExternalLink className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
+           </div>
+             <div>
+           </div>
+          </div>
     </div>
   );
 }
@@ -980,8 +977,8 @@ function Index() {
           <Solutions />
           <Products />
           <Showcase />
-          <Portfolio />
           <Events />
+          <Portfolio />
           <BookDemo />
         </main>
         <Footer />
@@ -1246,6 +1243,8 @@ function Solutions() {
   );
 }
 
+
+
 /* ----------------------------- Products ------------------------------ */
 
 function Products() {
@@ -1257,7 +1256,7 @@ function Products() {
   ];
 
   return (
-    <StarfieldSection id="products" className="py-24 border-t border-border">
+    <StarfieldSection id="leasing" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1327,7 +1326,7 @@ function Showcase() {
   const [active, setActive] = useState(environments[0].key);
   const env = environments.find((e) => e.key === active)!;
   return (
-    <StarfieldSection id="showcase" className="py-24 border-t border-border">
+    <StarfieldSection id="use-cases" className="py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           chip={
@@ -1395,6 +1394,34 @@ function Showcase() {
   );
 }
 
+
+/* ------------------------------ Events ------------------------------- */
+
+function Events() {
+  return (
+    <StarfieldSection id="events" className="py-24 border-t border-border">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeading
+          chip={
+            <>
+              <Calendar className="w-3.5 h-3.5 text-primary" /> Events & Exhibitions
+            </>
+          }
+          title="Meet Us at"
+          highlight="Industry Events"
+          subtitle="Join us at upcoming technology exhibitions, conferences, and seminars worldwide"
+        />
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {events.map((e) => (
+            <EventCard key={e.title} event={e} />
+          ))}
+        </div>
+      </div>
+    </StarfieldSection>
+  );
+}
+
 /* ----------------------------- Portfolio ----------------------------- */
 
 function Portfolio() {
@@ -1445,39 +1472,44 @@ function Portfolio() {
   );
 }
 
-/* ------------------------------ Events ------------------------------- */
-
-function Events() {
-  return (
-    <StarfieldSection id="events" className="py-24 border-t border-border">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeading
-          chip={
-            <>
-              <Calendar className="w-3.5 h-3.5 text-primary" /> Events & Exhibitions
-            </>
-          }
-          title="Meet Us at"
-          highlight="Industry Events"
-          subtitle="Join us at upcoming technology exhibitions, conferences, and seminars worldwide"
-        />
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {events.map((e) => (
-            <EventCard key={e.title} event={e} />
-          ))}
-        </div>
-      </div>
-    </StarfieldSection>
-  );
-}
-
 /* ----------------------------- Book Demo ----------------------------- */
 
 function BookDemo() {
   const [tab, setTab] = useState<"demo" | "lease">("demo");
+  const [isSwitching, setIsSwitching] = useState(false);
+
+  useEffect(() => {
+    const activate = (tabName: "lease" | "demo") => {
+      setIsSwitching(true);
+      const el = document.getElementById("leasing-inquiry-section");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        setTab(tabName);
+        setTimeout(() => setIsSwitching(false), 400);
+      }, 300);
+    };
+
+    const leaseHandler = () => activate("lease");
+    const demoHandler = () => activate("demo");
+
+    window.addEventListener("openLeasingInquiry", leaseHandler as EventListener);
+    window.addEventListener("openBookDemo", demoHandler as EventListener);
+
+    if (typeof window !== "undefined") {
+      if (window.location.hash === "#leasing-inquiry") leaseHandler();
+      if (window.location.hash === "#book-demo") demoHandler();
+    }
+
+    return () => {
+      window.removeEventListener("openLeasingInquiry", leaseHandler as EventListener);
+      window.removeEventListener("openBookDemo", demoHandler as EventListener);
+    };
+  }, []);
+
   return (
     <StarfieldSection id="contact" className="py-24 border-t border-border">
+      {/* Anchor target for Lease Now smooth scroll. scrollMarginTop prevents header overlap */}
+      <div id="leasing-inquiry-section" style={{ scrollMarginTop: "96px" }} />
       <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-6">
         <SectionHeading
@@ -1496,11 +1528,11 @@ function BookDemo() {
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => setTab("demo")}
-                className={`card-surface p-6 text-center transition-all ${
+                className={`card-surface p-6 text-center transform-gpu transition-transform duration-300 ease-out ${
                   tab === "demo"
-                    ? "!bg-gradient-brand !text-primary-foreground border-transparent shadow-glow"
+                    ? "!bg-gradient-brand !text-primary-foreground border-transparent shadow-glow scale-105"
                     : ""
-                }`}
+                } ${isSwitching && tab !== "demo" ? "opacity-80 scale-95" : ""}`}
               >
                 <Calendar className="w-6 h-6 mx-auto" />
                 <div className="mt-3 font-semibold">Book Demo</div>
@@ -1508,11 +1540,11 @@ function BookDemo() {
               </button>
               <button
                 onClick={() => setTab("lease")}
-                className={`card-surface p-6 text-center transition-all ${
+                className={`card-surface p-6 text-center transform-gpu transition-transform duration-300 ease-out ${
                   tab === "lease"
-                    ? "!bg-gradient-brand !text-primary-foreground border-transparent shadow-glow"
+                    ? "!bg-gradient-brand !text-primary-foreground border-transparent shadow-glow scale-105"
                     : ""
-                }`}
+                } ${isSwitching && tab !== "lease" ? "opacity-80 scale-95" : ""}`}
               >
                 <Building2 className="w-6 h-6 mx-auto" />
                 <div className="mt-3 font-semibold">Leasing Inquiry</div>
@@ -1549,19 +1581,71 @@ function BookDemo() {
             ))}
 
             <div className="card-surface p-6">
-              <div className="text-sm text-muted-foreground mb-4">Trusted by:</div>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold">500+</div>
-                  <div className="text-xs text-muted-foreground">Enterprises</div>
+              <div className="text-sm text-muted-foreground mb-4">Lease Pricing</div>
+
+              <div className="overflow-x-auto">
+                <div className="min-w-[640px]">
+                  <h4 className="font-semibold mb-2">SHORT-TERM LEASE (EVENTS / CONFERENCES)</h4>
+                  <p className="text-sm text-muted-foreground mb-4">Ideal for hotels and event organizers</p>
+
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-xs text-muted-foreground text-left">
+                        <th className="pb-2">Unit Size</th>
+                        <th className="pb-2">Daily Rate (5 hours)</th>
+                        <th className="pb-2">3 Days</th>
+                        <th className="pb-2">7 Days</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      <tr>
+                        <td className="py-3 font-medium">65 inches</td>
+                        <td className="py-3">Php 6,500</td>
+                        <td className="py-3">Php 17,500</td>
+                        <td className="py-3">Php 35,000</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 font-medium">86 inches</td>
+                        <td className="py-3">Php 8,500</td>
+                        <td className="py-3">Php 23,000</td>
+                        <td className="py-3">Php 48,000</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold">200+</div>
-                  <div className="text-xs text-muted-foreground">Schools</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">20+</div>
-                  <div className="text-xs text-muted-foreground">Countries</div>
+              </div>
+
+              <div className="border-t border-border my-6" />
+
+              <div className="overflow-x-auto">
+                <div className="min-w-[640px]">
+                  <h4 className="font-semibold mb-2">MONTHLY LEASE (ORGANIZATIONS / OFFICES)</h4>
+                  <p className="text-sm text-muted-foreground mb-4">Enterprise-grade leasing for sustained deployments</p>
+
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-xs text-muted-foreground text-left">
+                        <th className="pb-2">Unit Size</th>
+                        <th className="pb-2">Monthly Rate</th>
+                        <th className="pb-2">6 Months Contract</th>
+                        <th className="pb-2">12 Months Contract</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      <tr>
+                        <td className="py-3 font-medium">65 inches</td>
+                        <td className="py-3">Php 25,000</td>
+                        <td className="py-3">Php 23,000/mo</td>
+                        <td className="py-3">Php 21,000/mo</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 font-medium">86 inches</td>
+                        <td className="py-3">Php 35,000</td>
+                        <td className="py-3">Php 32,000/mo</td>
+                        <td className="py-3">Php 29,000/mo</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -1697,7 +1781,7 @@ function Footer() {
             links={["About Us", "Case Studies", "Events", "Careers", "Partners", "Contact"]}
           />
 
-          <div>
+          <div id="footer-contact">
             <div className="font-semibold mb-5">Contact</div>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2.5">
