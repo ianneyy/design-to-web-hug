@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Sparkles,
   Shield,
@@ -1058,7 +1058,16 @@ function Index() {
 
   return (
     <>
-      {showIntro && <IntroOverlay onComplete={() => setShowIntro(false)} />}
+      <AnimatePresence>
+        {showIntro && (
+          <IntroOverlay
+            onComplete={() => {
+              window.sessionStorage.setItem("introPlayed", "true");
+              setShowIntro(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}

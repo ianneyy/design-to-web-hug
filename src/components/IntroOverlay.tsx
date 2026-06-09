@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface IntroOverlayProps {
@@ -6,6 +6,8 @@ interface IntroOverlayProps {
 }
 
 export function IntroOverlay({ onComplete }: IntroOverlayProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
 
@@ -17,52 +19,51 @@ export function IntroOverlay({ onComplete }: IntroOverlayProps) {
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
 
-    if (sessionStorage.getItem("introPlayed") !== "true") {
-      sessionStorage.setItem("introPlayed", "true");
-    }
-
-    const timeoutId = window.setTimeout(() => {
+    // Let the intro video play for a fixed 3s, then start the transition.
+    // Driving it from a timer (rather than the video's own events) keeps the
+    // timing consistent regardless of clip length, load errors, or autoplay.
+    const timerId = window.setTimeout(() => {
       onComplete();
-    }, 5000);
+    }, 3000);
 
     return () => {
       html.style.overflow = previousHtmlOverflow;
       body.style.overflow = previousBodyOverflow;
-      window.clearTimeout(timeoutId);
+      window.clearTimeout(timerId);
     };
   }, [onComplete]);
 
   return (
-    <div
-      className="fixed inset-0 grid place-items-center text-white"
+    <motion.div
+      // Start at -25% so the black stop sits at 0%: the overlay is fully
+      // opaque during playback (no center vignette). On exit the transparent
+      // circle grows from the center out to the corners.
+      initial={{ "--intro-reveal": "-25%", opacity: 1 }}
+      exit={{ "--intro-reveal": "160%", opacity: 0 }}
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+      className="fixed inset-0 grid place-items-center"
       style={{
         zIndex: 99999,
-        background: "radial-gradient(circle at center, rgba(227, 227, 227, 0.08), transparent 24%), radial-gradient(circle at 30% 20%, rgba(227, 227, 227, 0.06), transparent 18%), black",
+        background: "black",
+        // Transparent circle (with a 25% soft edge) dissolves the overlay from
+        // the middle to the corners to reveal the page beneath.
+        WebkitMaskImage:
+          "radial-gradient(circle at center, transparent var(--intro-reveal), black calc(var(--intro-reveal) + 25%))",
+        maskImage:
+          "radial-gradient(circle at center, transparent var(--intro-reveal), black calc(var(--intro-reveal) + 25%))",
       }}
     >
-      <motion.h1
-        initial={{ opacity: 0, scale: 0.92, filter: "blur(36px)", color: "#787878" }}
-        animate={{
-          opacity: [0, 1, 1, 0],
-          scale: [0.92, 1, 1, 12],
-          filter: ["blur(36px)", "blur(0px)", "blur(0px)", "blur(48px)"],
-          color: ["#787878", "#e3e3e3", "#e3e3e3", "#e3e3e3"],
-        }}
-        transition={{
-          duration: 4,
-          times: [0, 0.18, 0.90, 1],
-          ease: ["easeOut", "linear", "easeInOut"],
-        }}
-        className="intro-overlay-text text-6xl md:text-7xl lg:text-[7rem] leading-none text-center"
-        style={{
-          fontFamily: '"Timeless", ui-serif, Georgia, serif',
-          fontWeight: 700,
-          letterSpacing: "0.25em",
-          textTransform: "uppercase",
-        }}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        // Scales per device: larger share of the screen on phones, smaller on
+        // bigger displays. object-contain keeps the full frame (no cropping).
+        className="h-auto w-[78%] object-contain sm:w-[60%] md:w-[45%] lg:w-[60%] xl:w-[60%]"
       >
-        MILLENNIUM
-      </motion.h1>
-    </div>
+        <source src="/videos/millenium-intro.mp4" type="video/mp4" />
+      </video>
+    </motion.div>
   );
 }
