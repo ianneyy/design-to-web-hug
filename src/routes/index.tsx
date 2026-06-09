@@ -1023,9 +1023,6 @@ function VideoShowcase() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
     </StarfieldSection>
   );
 }
