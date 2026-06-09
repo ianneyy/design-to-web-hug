@@ -45,7 +45,7 @@ import heroImg from "@/assets/millennium tv.png";
 import { Header } from "@/components/site/Header";
 import { ProjectCard } from "@/components/site/ProjectCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import Galaxy from "@/components/site/Galaxy";
+import HeroWave from "@/components/site/HeroWave";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
@@ -1123,13 +1123,7 @@ function Hero() {
     <section className="relative overflow-hidden">
       {/* <div className="absolute inset-0 bg-grid opacity-60" aria-hidden /> */}
       <div className="absolute w-full h-full inset-0">
-        <Galaxy
-          className="absolute inset-0 pointer-events-none"
-          glowIntensity={0.5}
-          saturation={0.8}
-          hueShift={240}
-          density={1.2}
-        />
+        <HeroWave />
         <div
           className="pointer-events-none absolute inset-0"
           style={{
