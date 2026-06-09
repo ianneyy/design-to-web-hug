@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap");
-@import "tailwindcss" source("../src");
+@import "tailwindcss";
+@source "../src";
 @import "tw-animate-css";
+
+@font-face {
+  font-family: "Timeless";
+  src: local("Timeless Bold"), local("Timeless"), url("/fonts/Timeless-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -201,8 +210,8 @@
 }
 
 .intro-overlay-text {
-  font-family: "Timeless", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight: 600;
+  font-family: "Timeless", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: 700;
   color: #e3e3e3;
   letter-spacing: 0.25em;
   text-transform: uppercase;

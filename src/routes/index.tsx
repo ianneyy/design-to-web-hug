@@ -125,7 +125,6 @@ const solutions = [
     grad: "from-violet-400 to-fuchsia-500",
   },
 ];
-
 // Technology That Empowers
 const gradientPalette = [
   "from-cyan-400 to-blue-500",
@@ -135,7 +134,6 @@ const gradientPalette = [
   "from-sky-400 to-indigo-500",
   "from-emerald-400 to-cyan-500",
 ];
-
 const productFeatures = [
   {
     icon: Wifi,
@@ -934,6 +932,67 @@ function StarfieldSection({
   );
 }
 
+function VideoShowcase() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {
+            // Autoplay may be blocked by the browser.
+          });
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <StarfieldSection className="py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeading
+          chip={<span className="chip">Product Video</span>}
+          title="See Millennium"
+          highlight="in Action"
+          subtitle="Discover how Millennium transforms presentations, collaboration, and smart environments."
+        />
+
+        <div className="mt-8 flex justify-center">
+          <div className="w-full max-w-4xl card-surface p-6">
+            <div className="rounded-xl overflow-hidden">
+              <video
+                ref={videoRef}
+                className="w-full aspect-video rounded-xl object-cover"
+                muted
+                autoPlay
+                loop
+                playsInline
+                controls
+                preload="metadata"
+              >
+                <source src="/videos/Millenvid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </StarfieldSection>
+  );
+}
+
 function Index() {
   const [activeView, setActiveView] = useState<"home" | "lease" | "demo">("home");
   const [showIntro, setShowIntro] = useState(true);
@@ -1008,6 +1067,7 @@ function Index() {
             <>
               <Hero />
               <Trust />
+              <VideoShowcase />
               <Solutions />
               <Products />
               <Showcase />
@@ -1632,7 +1692,8 @@ function ExperienceInnovation({
         }
       }
 
-      // terms section handling removed (terms moved to Book Demo)
+
+      // Duplicate nested VideoShowcase removed (kept top-level component)
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

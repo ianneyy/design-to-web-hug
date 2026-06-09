@@ -1,5 +1,5 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import './Galaxy.css';
 
 const vertexShader = `
@@ -215,12 +215,20 @@ export default function Galaxy({
   const targetMouseActive = useRef(0.0);
   const smoothMouseActive = useRef(0.0);
 
+  // Stabilize array props so the effect below doesn't re-init the WebGL
+  // context on every parent re-render (default `[...]` literals are new each render).
+  const focalMemo = useMemo<[number, number]>(() => focal, [focal[0], focal[1]]);
+  const rotationMemo = useMemo<[number, number]>(() => rotation, [rotation[0], rotation[1]]);
+
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
     const renderer = new Renderer({
       alpha: transparent,
-      premultipliedAlpha: false
+      premultipliedAlpha: false,
+      // Render at half resolution to cut GPU fill cost; the canvas still
+      // stretches to fill its container via CSS, so it looks full-size.
+      dpr: 0.5
     });
     const gl = renderer.gl;
 
@@ -235,8 +243,7 @@ export default function Galaxy({
     let program: any;
 
     function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      renderer.setSize(ctn.offsetWidth, ctn.offsetHeight);
       if (program) {
         program.uniforms.uResolution.value = new Color(
           gl.canvas.width,
@@ -257,8 +264,8 @@ export default function Galaxy({
         uResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
         },
-        uFocal: { value: new Float32Array(focal) },
-        uRotation: { value: new Float32Array(rotation) },
+        uFocal: { value: new Float32Array(focalMemo) },
+        uRotation: { value: new Float32Array(rotationMemo) },
         uStarSpeed: { value: starSpeed },
         uDensity: { value: density },
         uHueShift: { value: hueShift },
@@ -279,12 +286,23 @@ export default function Galaxy({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId: number;
+    ctn.appendChild(gl.canvas);
 
-    function update(t: number) {
-      animateId = requestAnimationFrame(update);
-      if (!disableAnimation) {
-program.uniforms.uTime.value = t * 0.001;
+    let animateId = 0;
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Cap rendering to ~30fps to ease GPU load.
+    const frameInterval = 1000 / 30;
+    let lastFrameTime = -frameInterval;
+    // Pause rendering while the hero is scrolled out of view.
+    let isVisible = true;
+
+    function renderFrame(t: number) {
+      if (!disableAnimation && !prefersReducedMotion) {
+        program.uniforms.uTime.value = t * 0.001;
         program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
       }
 
@@ -300,8 +318,29 @@ program.uniforms.uTime.value = t * 0.001;
 
       renderer.render({ scene: mesh });
     }
-    animateId = requestAnimationFrame(update);
-    ctn.appendChild(gl.canvas);
+
+    function update(t: number) {
+      animateId = requestAnimationFrame(update);
+      if (!isVisible) return;
+      if (t - lastFrameTime < frameInterval) return;
+      lastFrameTime = t;
+      renderFrame(t);
+    }
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(ctn);
+
+    if (prefersReducedMotion) {
+      // Draw a single static frame and skip the animation loop entirely.
+      renderFrame(0);
+    } else {
+      animateId = requestAnimationFrame(update);
+    }
 
     function handleMouseMove(e: MouseEvent) {
       const rect = ctn.getBoundingClientRect();
@@ -322,6 +361,7 @@ program.uniforms.uTime.value = t * 0.001;
 
     return () => {
       cancelAnimationFrame(animateId);
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', resize);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
@@ -331,8 +371,8 @@ program.uniforms.uTime.value = t * 0.001;
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
-    focal,
-    rotation,
+    focalMemo,
+    rotationMemo,
     starSpeed,
     density,
     hueShift,

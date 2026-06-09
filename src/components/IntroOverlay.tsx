@@ -49,11 +49,17 @@ export function IntroOverlay({ onComplete }: IntroOverlayProps) {
           color: ["#787878", "#e3e3e3", "#e3e3e3", "#e3e3e3"],
         }}
         transition={{
-          duration: 5,
-          times: [0, 0.18, 0.82, 1],
+          duration: 4,
+          times: [0, 0.18, 0.90, 1],
           ease: ["easeOut", "linear", "easeInOut"],
         }}
-        className="intro-overlay-text text-6xl md:text-7xl lg:text-[7.75rem] font-semibold leading-none tracking-[0.25em] uppercase text-center"
+        className="intro-overlay-text text-6xl md:text-7xl lg:text-[7rem] leading-none text-center"
+        style={{
+          fontFamily: '"Timeless", ui-serif, Georgia, serif',
+          fontWeight: 700,
+          letterSpacing: "0.25em",
+          textTransform: "uppercase",
+        }}
       >
         MILLENNIUM
       </motion.h1>
